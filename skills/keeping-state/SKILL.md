@@ -13,23 +13,20 @@ The conversation is volatile memory; `.ratchet-testing/` is disk. This is the pa
 
 ```
 .ratchet-testing/
-├── STATE.md      # roster of active testing tasks (one row each) — id, class, phase, NEXT ACTION, pointers
-├── NET.md        # THE asset: behavior → risk class → test pointers → proof pointer → status (protected / suspended / gap / R0+reason)
-├── RISKS.md      # human-approved risk model: class criteria, project-specific examples, amendment log
-├── HARVEST.md    # watermark + last-read pointers into .ratchet/
-├── FLAKES.md     # quarantine register: entry, verdict pattern, budget clock, disposition
-├── state/        # <task-id>.md — per-task cold-resume snapshot
-├── worklog/      # <task-id>.md — append-only journal: sizings, decisions, surprises, evidence pointers
-├── evidence/     # red demonstrations and mutation-audit reports, by behavior ID
-└── issues/       # seam requests and durable records readable by the main ratchet (which never has to read them)
+├── STATE.md      # roster of active testing tasks (one row each) — id, class, phase, NEXT ACTION, pointers — owner: this skill
+├── NET.md        # THE asset: behavior → risk class → test pointers → proof pointer → status (protected / suspended / gap / R0+reason) — owner: mapping-the-net
+├── RISKS.md      # human-approved risk model: class criteria, project-specific examples, amendment log — owner: defining-the-risks
+├── HARVEST.md    # watermark + last-read pointers into .ratchet/ — owner: harvesting-signals
+├── FLAKES.md     # quarantine register: entry, verdict pattern, budget clock, disposition — owner: quarantining-the-flake
+├── state/        # <task-id>.md — per-task cold-resume snapshot — owner: this skill
+├── worklog/      # <task-id>.md — append-only journal: sizings, decisions, surprises, evidence pointers — owner: this skill
+├── evidence/     # red demonstrations and mutation-audit reports, by behavior ID — owner: proving-by-failure
+└── issues/       # seam requests and durable records readable by the main ratchet (which never has to read them) — owner: requesting-the-seam
 ```
 
-Task id: `YYYY-MM-DD-<slug>`. This skill owns the STATE.md, `state/`, and `worklog/` formats; the others belong to their skills — NET.md to `mapping-the-net`, RISKS.md to `defining-the-risks`, HARVEST.md to `harvesting-signals`, FLAKES.md to `quarantining-the-flake`, `evidence/` to `proving-by-failure`, `issues/` to `requesting-the-seam`. Point at the owner; never restate its template. Add `.ratchet-testing/` to version control — state that isn't pushed dies with the laptop.
+Task id: `YYYY-MM-DD-<slug>`. Point at the owner; never restate its template. Add `.ratchet-testing/` to version control — state that isn't pushed dies with the laptop.
 
-## The ownership lane
-
-- **This system NEVER writes `.ratchet/`.** Production source and `.ratchet/` are read-only, always; project test paths and `.ratchet-testing/` are read-write. No exceptions; no seam → `requesting-the-seam`.
-- Both ratchets may be active in one repo with zero awareness of each other. Coordination is by reading (`harvesting-signals` owns the deconfliction check), never by writing into the other's directory.
+Write zones and deconfliction: `using-ratchet-testing` / `harvesting-signals`. This system never writes `.ratchet/`.
 
 ## What goes where — the only rule you need
 

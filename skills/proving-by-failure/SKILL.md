@@ -49,10 +49,6 @@ Verbatim means the assertion line(s) and exit status — enough for an audit to 
 
 **R3 note:** proof at R3 does not end here. Every R3-protected test joins EVERY mutation-audit sample, so this red demo will be re-witnessed each sweep (`auditing-the-suite`).
 
-## The refusal
-
-No red on record → the claim "done" is structurally blocked. Not discouraged, not "at your discretion" — blocked. A test without a witnessed failure is not in the net, whatever the suite output says.
-
 ## Stop conditions
 
 - **The test won't go red** under any of the three breaks → it cannot fail; it does not enter the net. Rewrite it — or, if the behavior is unreachable without a production-source change, `requesting-the-seam`.
@@ -64,7 +60,7 @@ No red on record → the claim "done" is structurally blocked. Not discouraged, 
 
 | Thought | Reality |
 |---|---|
-| "It passed on the first run — clearly it works" | A tautology also passes on the first run. Green distinguishes nothing; red does. |
+| "It passed on the first run — clearly it works" | A tautology also passes on the first run. |
 | "I watched it fail during development" | Scrollback dies with the session. If it isn't in `evidence/`, the net never saw it. |
 | "Mutating prod violates the write zone" | The break is working-tree only, never committed, proven undone. That is the sanction — and its whole extent. |
 | "Six steps per test is ceremony" | The entry is ~8 lines, and it is what every audit and resume trusts. Ceremony that pays rent stays. |

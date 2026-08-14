@@ -15,7 +15,7 @@ Confirmed flake = **same test, same code, different verdicts.** Rerun the test o
 
 - Different verdicts across runs → confirmed. Proceed to Step 2.
 - Consistently red → not a flake — the net may have caught a real break. Report it; **never quarantine a genuine regression to make the suite green.**
-- One odd failure that won't reproduce → a suspicion, not a confirmation. Worklog the observation and watch.
+- One odd failure that won't reproduce → a suspicion, not a confirmation. Worklog a `surprise` entry and watch.
 
 ## Step 2 — Quarantine on first confirmation, immediately
 
@@ -34,7 +34,7 @@ Append an entry to `.ratchet-testing/FLAKES.md` (this skill owns the format):
 Three effects, same moment:
 
 1. **Authority stripped.** The test's verdict is excluded from the gate-relevant set — it can no longer pass or fail anything. It keeps executing for data; the verdict pattern is diagnostic.
-2. **The map never overstates the net.** Flip the behavior's NET.md row to `suspended` (`mapping-the-net`) in the same commit as the FLAKES.md entry. A suspended R2+ behavior is a gap, and R2+ gaps auto-queue backfill (`backfilling-the-gap`) at the next harvest.
+2. **The map never overstates the net.** Flip the behavior's NET.md row to `suspended` in the same commit as the FLAKES.md entry (row lifecycle: `mapping-the-net`).
 3. Worklog `quarantine` entry: test, behavior ID, pointer to the FLAKES.md entry.
 
 ## Step 3 — Disposition within budget
@@ -51,12 +51,12 @@ Close with a worklog `disposition` entry naming the outcome and why. The FLAKES.
 
 ## Overdue blocks the sweep
 
-Budget end passed with disposition OPEN → the next `auditing-the-suite` run **cannot be declared clean**; its report ends `BLOCKED on flake dispositions`. There is no waiver. If the disposition is genuinely stuck — needs a seam, needs a human decision — say so in the entry and worklog `blocked`. Blocked-and-loud is legal; silent-and-overdue is not.
+Overdue with disposition OPEN blocks the sweep (`auditing-the-suite` Step 4). Blocked-and-loud is legal; silent-and-overdue is not.
 
 ## Stop conditions
 
 - The nondeterminism traces to production source (a real race, not a test artifact) → you cannot fix it; record it as an issue in `.ratchet-testing/issues/` for the human or main ratchet, keep the test quarantined, NET.md row stays `suspended`.
-- The flaky test belongs to an ACTIVE main-ratchet task per the `.ratchet/STATE.md` roster (the deconfliction check — `harvesting-signals`) → quarantine and suspend as usual (FLAKES.md and NET.md are yours), but do not edit the test file until that task lands.
+- Deconfliction check (`harvesting-signals`) before any test-file write. The flaky test is off-limits by that check → quarantine and suspend as usual (FLAKES.md and NET.md are yours), but do not edit the test file until the owning task lands.
 - No seam to rewrite at → `requesting-the-seam`; disposition becomes Delete-with-`gap` plus a pointer to the request.
 
 ## Rationalization check
@@ -65,5 +65,4 @@ Budget end passed with disposition OPEN → the next `auditing-the-suite` run **
 |---|---|
 | "It passed on rerun, we're fine" | Two verdicts on one commit IS the failure. The rerun confirmed the flake, not the pass. |
 | "It only flakes in CI — quarantine can wait" | Every gate it votes in is taxed already. Authority is stripped on confirmation, not on convenience. |
-| "Deleting a test reduces coverage" | The net is measured in behaviors, not test count. An honest `gap` outranks a lying `protected`. |
 | "Three sessions is too tight for this one" | The budget line is amendable in place — with a logged reason. Silent overrun is the one option that doesn't exist. |

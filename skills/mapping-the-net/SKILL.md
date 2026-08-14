@@ -53,7 +53,7 @@ Deliberate non-protection is minimality; accidental non-protection is a gap. NET
 
 ## Who writes it, and when
 
-Any spine skill at RECORD — and only at RECORD. The row change lands **atomically with the change that altered protection**: the NET.md row, the `evidence/` file, and the test change in the same commit (`landing-the-tests`). The map is updated at the moment protection changes, not at the end of a session — protection and its map never diverge in history.
+Any spine skill at RECORD — and only at RECORD. Row changes land per `landing-the-tests` atomicity.
 
 The map is a claim until checked: audits (`auditing-the-suite`) mutation-sample rows and re-prove them; resumes (`resuming-work`) verify touched rows against the actual test files. Expect to be audited; write rows you'd survive.
 

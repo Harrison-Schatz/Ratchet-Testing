@@ -11,9 +11,9 @@ The main ratchet writes tests to pass a done-gate; they prove today's change wor
 
 ## Step 1 — Claim and scope
 
-1. Input arrives from `harvesting-signals`: a Tier 2/3 land observed in `.ratchet/`, queued as a `harden` task. Queue position by rule: after pins and R3 gaps, before lower-class backfill and audits.
-2. **Deconfliction first.** Re-read `.ratchet/STATE.md`'s roster: test files owned by an ACTIVE main-ratchet task are off-limits until it lands. The check lives in `harvesting-signals`; this is where it bites. Owned files → the task waits.
-3. Size via `sizing-the-tests`: the behaviors the landed change touched, classified against RISKS.md, highest class wins. One worklog `sizing` line.
+1. Input arrives from `harvesting-signals`: a Tier 2/3 land observed in `.ratchet/`, queued as a `harden` task.
+2. Deconfliction check (`harvesting-signals`) before any test-file write.
+3. Size via `sizing-the-tests`. One worklog `sizing` line.
 4. List the landed change's evidence-tests from its commit and worklog pointers. **Each test gets its own verdict** — never harden "the batch."
 
 ## Step 2 — The coupling checklist
@@ -32,7 +32,7 @@ Run every candidate through all five. Each check is a yes/no you could defend fr
 
 - **Promote** — passes all five (adding the tag if that is the only miss): the test enters the net. NET.md row updated via `mapping-the-net`, and the promotion walks `proving-by-failure` — a promoted test with no red demo on record is not promoted.
 - **Rewrite at the seam** — the behavior deserves protection but the test is coupled: write a new test at the seam, and the new test walks `proving-by-failure` like any other.
-- **Leave dev-scoped** — recorded, not silent: the test keeps passing in the dev suite but claims no NET.md protection. Worklog `decision` line naming the test and why. If the behavior it half-covered is R2+ and unprotected, that is a gap — NET.md says so, and `backfilling-the-gap` queues at the next harvest.
+- **Leave dev-scoped** — recorded, not silent: the test keeps passing in the dev suite but claims no NET.md protection. Worklog `decision` line naming the test and why. If the behavior it half-covered is R2+ and unprotected, that is a gap (row lifecycle: `mapping-the-net`).
 
 ## Step 4 — Land
 

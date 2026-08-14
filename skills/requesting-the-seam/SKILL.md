@@ -11,7 +11,7 @@ description: Use the moment a behavior cannot be tested without a production-sou
 
 ## The refusal, restated
 
-Production source and `.ratchet/` are **read-only, always**. You do not add the constructor arg yourself, you do not sneak a "no behavior change" refactor commit, you do not fake a seam by monkeypatching internals from the test side. The structural invariant — Ratchet-Testing cannot break the shipped system — is what buys gate-free task flow; one smuggled seam spends it for the whole system.
+Production source and `.ratchet/` are **read-only, always**. You do not add the constructor arg yourself, you do not sneak a "no behavior change" refactor commit, you do not fake a seam by monkeypatching internals from the test side.
 
 ## Step 1 — Name the blocker precisely
 
@@ -37,6 +37,8 @@ Status: open · opened <date> · class <R1|R2|R3>
 ```
 
 The `Status` line is the interface: the main ratchet or the human flips it to `landed (<date>)` or `declined (<date>)`. They never have to read anything else of ours — the request must stand alone.
+
+Non-seam records (candidate issues from characterization or flake observation) use `<date>-issue-<slug>.md` with the same Status line convention.
 
 ## Step 4 — Record the gap
 

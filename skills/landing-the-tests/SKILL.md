@@ -7,7 +7,7 @@ description: Use when proving-by-failure has passed and a testing task's work mu
 
 Protection that exists only in a working tree protects nothing, and a map updated "later" is a map that lies in history. This skill is mechanics: one atomic commit that changes the net and its map together, then a clean record for whoever resumes next.
 
-**Prevents:** failure mode #12 (stale trust in the map) at its source — protection and its map never diverge in history; plus protection-claimed-but-never-integrated, which sits outside the numbered table.
+**Prevents:** protection claimed but never integrated — the catalog's charge for this skill, upstream of #12 (stale trust in the map), which `auditing-the-suite` and `resuming-work` own.
 
 ## Step 0 — Preconditions
 
@@ -28,7 +28,7 @@ Testing commits are test-only and cite the behavior ID(s) plus the task-id:
 test(net): pin expired-token rejection — auth/valid-login#expired-token
 
 task: 2026-08-14-pin-expired-token
-type: pin        # harden | pin | backfill | characterize
+type: pin        # harden | pin | backfill | characterize | audit
 evidence: .ratchet-testing/evidence/auth--valid-login.md
 ```
 
@@ -39,10 +39,10 @@ Check the staged diff, not your memory:
 - [ ] `git diff --cached --stat` — every path is a project test path or `.ratchet-testing/`. Anything else → unstage and abort.
 - [ ] Every row flipping to `protected` has a proof pointer, and the pointed-at evidence entry is in this same staged set.
 - [ ] Every durable test in the diff carries its `[net: <behavior-id>]` tag.
-- [ ] Deconfliction re-check: no staged test file belongs to an active main-ratchet task per the `.ratchet/STATE.md` roster (the check is `harvesting-signals`'; re-run it here because land time is write time).
+- [ ] Deconfliction check (`harvesting-signals`) before any test-file write. Re-run it here because land time is write time.
 - [ ] Suite green on the exact tree being committed.
 
-Then commit. Test-only commits usually land directly on the default branch — the structural invariant holds: worst case this commit breaks a test, never the shipped system. If the project's convention demands branches or PRs, follow it (determine the convention the way the parent's `landing-the-change` does). Never force-push; never rewrite history that contains evidence.
+Then commit. Test-only commits usually land directly on the default branch. If the project's convention demands branches or PRs, follow it (determine the convention the way the parent's `landing-the-change` does). Never force-push; never rewrite history that contains evidence.
 
 ## Step 4 — Close the record
 

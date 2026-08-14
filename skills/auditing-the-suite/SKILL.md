@@ -7,11 +7,11 @@ description: Use when the sweep is due — every 5 harvests or a suite-runtime b
 
 `NET.md` says which behaviors are protected. Code drifts, tests rot, and past sessions lie accidentally — so the sweep re-proves a sample of those claims the only way a test is ever proven: by watching it go red. A row that stays green while its behavior is broken is not protection; it is a liar wearing a green badge.
 
-**Prevents:** failure mode #12 (stale trust in the map) and #7 (suite cost creep); its blocking rule is the enforcement arm of #4 (suite rot).
+**Prevents:** failure mode #12 (stale trust in the map) and #7 (suite cost creep); its blocking rule enforces `quarantining-the-flake`'s protocol (#4's owner).
 
 ## When the sweep is due
 
-Read the sweep-cadence config in `HARVEST.md` (owned by `harvesting-signals`): **every 5 harvests OR suite runtime over budget, whichever first** (provisional — amend in place with a logged reason). A due sweep queues behind pins, R3 gaps, hardening, and lower-class backfill — audits are last, preempted only by an explicit human request.
+Read the sweep-cadence config in `HARVEST.md` (`harvesting-signals` owns it). A suite-runtime budget breach makes the sweep due now — and the sweep queues `charging-the-rent` for the census (Step 3). (queue rules: `harvesting-signals`)
 
 ## Step 1 — Draw the sample, on record
 

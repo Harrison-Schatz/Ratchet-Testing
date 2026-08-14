@@ -12,9 +12,9 @@ A fixed bug with no pin is a bug on layaway: nothing stops the next change from 
 ## Step 1 — Intake
 
 1. Input from `harvesting-signals`: a `.ratchet/worklog/` debugging entry — the parent's `debugging-to-root-cause` leaves them — naming a root cause and a fix commit. Both are required; a symptom description without a named cause pins nothing.
-2. **The regression-window rule: pins outrank everything.** Queue priority is pins → R3 gaps → hardening → lower-class backfill → audits; a pin preempts whatever non-pin task would otherwise start. The window between fix and pin is the exposure.
+2. **The regression-window rule.** Pins outrank everything (queue rules: `harvesting-signals`). The window between fix and pin is the exposure.
 3. Deconfliction (`harvesting-signals`): if the fix's test files belong to a still-active main-ratchet task, the pin waits for that land.
-4. Size via `sizing-the-tests`: the behavior the bug broke, classified against RISKS.md. One worklog `sizing` line.
+4. Size via `sizing-the-tests`. One worklog `sizing` line.
 
 ## Step 2 — Write the pin
 
@@ -28,9 +28,7 @@ This IS `proving-by-failure` applied — that skill owns the mechanics and the e
 
 1. Temporarily remove the fix: `git revert -n <fix-commit>`, or stash-apply a saved breaking patch of the fix hunk. Record which.
 2. Run the pin → capture the verbatim RED output. **A pin that passes on pre-fix code is not a pin** — back to Step 2.
-3. Restore; prove restoration with `git status`/`git diff` EMPTY.
-4. Run the pin → green. Full suite → green.
-5. Both outputs, dated, appended to `evidence/<area>--<slug>.md`. Worklog `proof` line pointing at the file — never pasting it.
+3. Rest of the procedure: `proving-by-failure`.
 
 ## Step 4 — Land
 

@@ -43,32 +43,23 @@ Open `.ratchet-testing/HARVEST.md`. For each source, read only what is newer tha
 
 ## Step 3 — Convert signals to tasks
 
-Each signal maps to a task type by rule — no judgment at intake:
+Convert signals per the routing table (`using-ratchet-testing` Step 1); conversion is by rule — no judgment at intake.
 
-| # | Signal (read from) | Generates | Routes to |
-|---|---|---|---|
-| 1 | Tier 2/3 task lands (`.ratchet/STATE.md` roster, worklogs) | reinforcement pass over the landed change's evidence-tests | `hardening-the-evidence` |
-| 2 | Root-caused fix (`.ratchet/worklog/`, debugging entries) | regression pin | `pinning-the-bug` |
-| 3 | New rule in `.ratchet/LESSONS.md` | candidate invariant to encode as a test | `backfilling-the-gap` |
-| 4 | Declined/deferred review finding (`.ratchet/review/`, `.ratchet/` issues) | risk-register entry; backfill if it names a behavior | `backfilling-the-gap` |
-| 5 | Brief acceptance checks (`.ratchet/briefs/`) | candidate durable tests for behaviors entering the map | `mapping-the-net` → `backfilling-the-gap` |
-| 6 | Gap at R2+ discovered in `NET.md` (including suspensions) | backfill | `backfilling-the-gap` |
-| 7 | Scheduled sweep due (counter or runtime budget, per Config) | suite health audit | `auditing-the-suite` |
-| 8 | Human request | as specified | any |
-
-Two supplementary passes ride along:
+Supplementary passes ride along:
 
 - A brief or plan naming legacy behavior about to change, where the behavior has no tests → queue `characterizing-the-behavior`.
+- An R2+ `NET.md` gap whose behavior exists in code but has no spec of record → queue `characterizing-the-behavior`. Precedence: spec of record present → `backfilling-the-gap`; absent (the behavior exists in code, its intent never stated) → `characterizing-the-behavior` first. Brief acceptance checks are a spec of record.
+- Declined/deferred review finding → `mapping-the-net` records the behavior's NET.md row (gap or R0-with-reason, pointing at the finding — the risk-register entry), then `backfilling-the-gap` for any resulting R2+ gap.
 - Re-check open seam requests in `.ratchet-testing/issues/` (`requesting-the-seam`): a landed seam queues the backfill or pin it was blocking.
 
 A harvested behavior with no `NET.md` row enters the map as `gap` or `R0(<reason>)` via `mapping-the-net` — never silently.
 
 ## Step 4 — Queue and record
 
-- **The queue lives in HARVEST.md** — one line per queued task, held in priority order: **pins → R3 gaps → hardening → lower-class backfill → audits.** An explicit human request preempts all.
+- **The queue lives in HARVEST.md** — one line per queued task, held in priority order: **pins → R3 gaps → hardening → lower-class backfill → audits.** An explicit human request preempts all. Characterize tasks take the rank of the gap they close: an R3 pre-change characterization ranks with R3 gaps; others rank with their class's backfill.
 - **The roster (`.ratchet-testing/STATE.md`) holds only ACTIVE tasks.** A task gets its roster row when claimed, not when queued (`keeping-state`). Formal classification happens at claim (`sizing-the-tests`); the queue's Class column is a copy of the `NET.md` row, kept only for ordering.
 - Bump "Harvests since last sweep". At the Config threshold — or any time suite runtime is over budget — queue `auditing-the-suite`.
-- One worklog `harvest` entry: sources advanced, signals found, tasks queued (`keeping-state` for where entries live).
+- The pass's record IS the `HARVEST.md` update (watermark move, counter, queue diff). A `harvest` worklog entry is written only at claim time, in the claimed task's worklog (`keeping-state`).
 
 ## The deconfliction check — failure mode #11's answer
 
@@ -97,4 +88,3 @@ No `.ratchet/` directory → harvest is a no-op, not an error. The queue is fed 
 | "The queue is already full; skip this harvest" | Pins outrank everything queued, and a regression window may have opened since the last read. One pass is nearly free. |
 | "That main-ratchet task looks abandoned; its test files are fair game" | Off-limits until it *lands*. Stalled is not landed. Queue your task and take the next one. |
 | "I'll put the new tasks straight on the roster" | The roster holds only ACTIVE tasks. A queue living in the roster makes every resume wade through dead rows. |
-| "No .ratchet/ here, so there's nothing to do" | Harvest is the intake, not the system. `NET.md` gaps and human requests still feed the queue. |

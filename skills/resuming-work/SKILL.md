@@ -28,7 +28,7 @@ git log --oneline -10       # test-only commits matching the recorded step?
 
 Then spot-check the NET.md rows the task touched: every `protected` row's test pointer must resolve to a real test carrying its `[net: <behavior-id>]` tag, and its proof pointer to a dated entry in `evidence/`.
 
-Before touching any test file, re-run the deconfliction check — the main ratchet may have claimed test paths since your session died: read `.ratchet/STATE.md`'s roster (`harvesting-signals` owns this check; `.ratchet/` stays read-only).
+Deconfliction check (`harvesting-signals`) before any test-file write.
 
 | Finding | Meaning | Action |
 |---|---|---|

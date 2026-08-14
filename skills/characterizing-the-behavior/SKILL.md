@@ -7,7 +7,7 @@ description: Use when harvest surfaces a brief or plan naming legacy behavior so
 
 You cannot protect a behavior nobody has written down; a characterization test writes it down as executable fact. It asserts what the code *actually does right now* — not what it should do — so every future diff in behavior is one somebody chose. This is the parent's `characterizing-legacy-code` discipline, re-scoped to this system's boundary: production source stays read-only, always.
 
-**Prevents:** failure mode #9 (unknown blind spots) on legacy behavior — and, beyond the numbered table, regressions in behavior nobody specified but everybody depends on.
+**Prevents:** untested legacy behavior — the catalog's un-numbered charge for this skill: blind change to behavior nobody pinned. (#9's owners are `mapping-the-net` and `backfilling-the-gap`.)
 
 ## Step 1 — Trigger and mapping
 
@@ -16,7 +16,9 @@ Two triggers, both arriving via `harvesting-signals`:
 1. A `.ratchet/briefs/` entry or plan names legacy behavior a dev task will change — characterize BEFORE that change lands, so the diff has a baseline.
 2. An R2+ behavior has no tests and no spec of record — including the characterization pin every R3 battery requires (`sizing-the-tests`).
 
-If the behavior has no `NET.md` row yet, it enters first via `mapping-the-net` — as `gap`, never silently. Before any test-file write, run the deconfliction check (`harvesting-signals`): test files owned by an active main-ratchet task are off-limits until it lands.
+Precedence: spec of record present → `backfilling-the-gap`; absent (the behavior exists in code, its intent never stated) → `characterizing-the-behavior` first. Brief acceptance checks are a spec of record.
+
+If the behavior has no `NET.md` row yet, it enters first via `mapping-the-net` — as `gap`, never silently. Deconfliction check (`harvesting-signals`) before any test-file write.
 
 ## Step 2 — Reach the behavior at a seam
 
@@ -36,7 +38,7 @@ Found a bug, an oddity, a security smell? **Pin it as-is** and record it as a ca
 
 ## Step 5 — Prove the pins
 
-Characterization tests are green against unchanged code by construction — so green proves nothing here either. `proving-by-failure` applies unchanged: temporarily mutate the captured behavior path, watch the test go red, restore (git status/diff empty), watch green, append both outputs to `.ratchet-testing/evidence/<area>--<slug>.md`. A pin that stays green under mutation pins nothing.
+Characterization tests are green against unchanged code by construction — green proves nothing here either — mutate the captured path and run `proving-by-failure`. A pin that stays green under mutation pins nothing.
 
 ## Step 6 — Record
 
