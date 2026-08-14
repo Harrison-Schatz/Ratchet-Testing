@@ -2,7 +2,7 @@
 
 **The pawl must be load-tested.**
 
-A ratchet holds because of its pawl. In the parent methodology, the test suite *is* the pawl — the mechanism that keeps every verified click from slipping back. Ratchet-Testing is the sub-ratchet that builds and maintains that pawl: an evidence-gated methodology for coding agents, tailored to develop software tests that form a **durable safety net** — one that proves the system works today and catches it when future changes break it — effectively, accurately, and with minimal resource.
+A ratchet holds because of its pawl. In the parent methodology, the test suite *is* the pawl — the mechanism that keeps every verified click from slipping back. Ratchet-Testing is the sub-ratchet that improves and maintains that pawl: an evidence-gated methodology for coding agents, tailored to develop software tests that form a **durable safety net** — one that proves the system works today and catches it when future changes break it — effectively, accurately, and with minimal resource.
 
 It is built on two observations of its own:
 
