@@ -1,6 +1,6 @@
 ---
 name: auditing-the-suite
-description: Use when the sweep is due — every 5 harvests or a suite-runtime budget breach per HARVEST.md config, whichever comes first — typically queued by `harvesting-signals`. Also use when the user says "audit the suite", "is the net still real", or "why is the suite so slow", or when NET.md rows have gone unre-proven past a sweep cycle. The map is a claim until checked.
+description: Use when the sweep is due per HARVEST.md's cadence config, or the moment a suite-runtime budget breach makes it due — typically queued by `harvesting-signals`. Also use when the user says "audit the suite", "is the net still real", or "why is the suite so slow", or when NET.md rows have gone unre-proven past a sweep cycle. The map is a claim until checked.
 ---
 
 # Auditing the Suite
