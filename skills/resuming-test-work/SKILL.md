@@ -1,9 +1,9 @@
 ---
-name: resuming-work
-description: Use at the start of any session where .ratchet-testing/STATE.md's roster lists an active task, when the user says "continue the testing work", "pick up where we left off", or references testing tasks you have no memory of, or after a context compaction mid-task. Resume from disk — do not reconstruct from guesswork or restart tests that already exist.
+name: resuming-test-work
+description: Use at the start of any session where .ratchet-testing/STATE.md's roster lists an active task, when the user says "continue the testing work" or references testing tasks you have no memory of, or after a context compaction mid-testing-task. A bare "continue" or "pick up where we left off" with no testing context is the parent's resuming-work, not this skill. Resume from disk — do not reconstruct from guesswork or restart tests that already exist.
 ---
 
-# Resuming Work
+# Resuming Test Work
 
 A fresh session knows nothing; the previous one wrote everything needed into `.ratchet-testing/`. Resume = read, verify the claims against the repo, reconcile, continue. This is the parent's `resuming-work` pointed at this system's state — with one upgrade: here the map itself (NET.md) is among the claims to check.
 

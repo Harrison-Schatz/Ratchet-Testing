@@ -33,7 +33,7 @@ Red demos are `proving-by-failure`'s mechanics; the battery says how many tests 
 
 ## Step 4 — Record the sizing
 
-One worklog `sizing` entry in `.ratchet-testing/worklog/<task-id>.md` (discipline per `keeping-state`):
+One worklog `sizing` entry in `.ratchet-testing/worklog/<task-id>.md` (discipline per `keeping-test-state`):
 
 ```
 ## [2026-08-14 09:12] <task-id> — sizing

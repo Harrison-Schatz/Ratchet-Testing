@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.1.1 — 2026-08-17
+
+### Changed
+- Renamed the two inherited skills that collided with the parent Ratchet catalog: `keeping-state` → `keeping-test-state` and `resuming-work` → `resuming-test-work`. Installing both catalogs into one skills directory previously let whichever repo copied second silently shadow the other's version, breaking one system's context-loss guarantee. The rename follows the convention every other inherited skill already used (`sizing-the-tests`, `landing-the-tests`, …); references to "the parent's `keeping-state`/`resuming-work`" intentionally keep the parent names.
+- Tightened `resuming-test-work`'s trigger description: a bare "continue" now routes to the parent's `resuming-work`; only testing-flavored resumes route here.
+
 ## 0.1.0 — 2026-08-14
 
 First release: the Ratchet-Testing methodology, v0.

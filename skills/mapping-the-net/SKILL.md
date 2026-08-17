@@ -55,7 +55,7 @@ Deliberate non-protection is minimality; accidental non-protection is a gap. NET
 
 Any spine skill at RECORD — and only at RECORD. Row changes land per `landing-the-tests` atomicity.
 
-The map is a claim until checked: audits (`auditing-the-suite`) mutation-sample rows and re-prove them; resumes (`resuming-work`) verify touched rows against the actual test files. Expect to be audited; write rows you'd survive.
+The map is a claim until checked: audits (`auditing-the-suite`) mutation-sample rows and re-prove them; resumes (`resuming-test-work`) verify touched rows against the actual test files. Expect to be audited; write rows you'd survive.
 
 ## Growth path
 

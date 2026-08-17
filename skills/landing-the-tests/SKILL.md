@@ -7,7 +7,7 @@ description: Use when proving-by-failure has passed and a testing task's work mu
 
 Protection that exists only in a working tree protects nothing, and a map updated "later" is a map that lies in history. This skill is mechanics: one atomic commit that changes the net and its map together, then a clean record for whoever resumes next.
 
-**Prevents:** protection claimed but never integrated — the catalog's charge for this skill, upstream of #12 (stale trust in the map), which `auditing-the-suite` and `resuming-work` own.
+**Prevents:** protection claimed but never integrated — the catalog's charge for this skill, upstream of #12 (stale trust in the map), which `auditing-the-suite` and `resuming-test-work` own.
 
 ## Step 0 — Preconditions
 
@@ -46,7 +46,7 @@ Then commit. Test-only commits usually land directly on the default branch. If t
 
 ## Step 4 — Close the record
 
-1. Worklog `done` entry: task-id, commit SHA, behavior IDs touched, evidence pointers (formats: `keeping-state`).
+1. Worklog `done` entry: task-id, commit SHA, behavior IDs touched, evidence pointers (formats: `keeping-test-state`).
 2. Clear the task's row from the `.ratchet-testing/STATE.md` roster; archive/delete `state/<task-id>.md`. The roster holds ACTIVE tasks only — a landed task's permanent record is its worklog.
 3. Rows this land could not flip (a gap left open, a seam still pending) stay honest in `NET.md` — `mapping-the-net` owns the vocabulary; never mark `protected` on hope.
 

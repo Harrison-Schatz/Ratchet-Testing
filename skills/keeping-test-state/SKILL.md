@@ -1,13 +1,13 @@
 ---
-name: keeping-state
+name: keeping-test-state
 description: Use whenever something worth surviving the session is learned or decided — a harvest signal, a sizing, a red demo, a quarantine, a blocker — and at every spine boundary (claimed → sized → built → proven → landed). Also use when creating the .ratchet-testing/ directory for the first time, or when unsure what belongs in STATE.md vs the worklog vs NET.md vs FLAKES.md.
 ---
 
-# Keeping State
+# Keeping Test State
 
 The conversation is volatile memory; `.ratchet-testing/` is disk. This is the parent's `keeping-state` discipline pointed at this system's own directory: anything a fresh session needs gets written at the moment it is known — not at the end, because the end is what a dying session never reaches.
 
-**Prevents:** context loss between sessions — outside the spec's #1–#12 table, and the failure the whole state directory exists to defeat. Failure mode #12 (stale trust in the map) is answered by `resuming-work` and `auditing-the-suite`, both of which can only verify what this skill wrote.
+**Prevents:** context loss between sessions — outside the spec's #1–#12 table, and the failure the whole state directory exists to defeat. Failure mode #12 (stale trust in the map) is answered by `resuming-test-work` and `auditing-the-suite`, both of which can only verify what this skill wrote.
 
 ## The layout
 
@@ -105,7 +105,7 @@ red; restored clean, suite green. Outputs: evidence/auth--valid-login.md (2026-0
 
 - About to write under `.ratchet/` or production source → stop. That is a zone violation, not state-keeping. Untestable without a prod change → `requesting-the-seam`.
 - About to flip a NET.md status by hand "while updating state" → stop; NET.md changes go through `mapping-the-net`, and `protected` without an evidence/ pointer is illegal.
-- Roster row with no state file, or state file with no row → reconcile before any new work (`resuming-work` has the procedure).
+- Roster row with no state file, or state file with no row → reconcile before any new work (`resuming-test-work` has the procedure).
 
 ## Rationalization check
 

@@ -12,7 +12,7 @@ Ratchet-Testing is the sub-ratchet that builds and maintains the test suite as a
 ## Step 0 — Orient (always, before anything else)
 
 1. Read `.ratchet-testing/STATE.md` — the roster of ACTIVE testing tasks.
-   - **Lists an active task** → this is a resume. Invoke `resuming-work` with that task-id. STOP here; that skill takes over.
+   - **Lists an active task** → this is a resume. Invoke `resuming-test-work` with that task-id. STOP here; that skill takes over.
    - **Empty or missing** → continue.
 2. Check for `.ratchet-testing/RISKS.md`. **If it doesn't exist or is unapproved, `defining-the-risks` is the only legal first task** — nothing above R0 can be classified against an unapproved risk model, and everything downstream sizes against it. STOP routing until it exists.
 3. Read `.ratchet-testing/NET.md` — what is `protected`, `suspended`, `gap`, or `R0(<reason>)` right now. The map is a claim until checked; audits and resumes verify it.
@@ -34,7 +34,7 @@ Ratchet-Testing is the sub-ratchet that builds and maintains the test suite as a
 | Flake observed — mid-ANYTHING: same test, same code, different verdicts | `quarantining-the-flake`, immediately | — |
 | Behavior untestable without a production-source change (no seam) | `requesting-the-seam` | — |
 | "Is it done?", "the test works", ANY done-claim about a test | `proving-by-failure` | — |
-| Active roster row, "continue", compaction mid-task | `resuming-work` | — |
+| Active roster row, "continue", compaction mid-task | `resuming-test-work` | — |
 | Explicit human request | as specified | any |
 
 Precedence: spec of record present → `backfilling-the-gap`; absent (the behavior exists in code, its intent never stated) → `characterizing-the-behavior` first. Brief acceptance checks are a spec of record. (A spec of record is any stated intended behavior: brief acceptance checks, a LESSONS.md invariant, a RISKS.md example, or a declined finding's own text.)
@@ -51,7 +51,7 @@ ORIENT (+ HARVEST) → SIZE (against RISKS.md) → BUILD (battery-scaled) → PR
 - **SIZE** — `sizing-the-tests`: mechanical lookup of the behavior(s) against `RISKS.md`; a task touching multiple behaviors inherits the highest class; one worklog `sizing` line. Criteria don't cover the behavior → back to `defining-the-risks`, never an improvised class.
 - **BUILD** — the risk class sets the battery; the task type routes: harden → `hardening-the-evidence`, pin → `pinning-the-bug`, backfill → `backfilling-the-gap`, characterize → `characterizing-the-behavior`.
 - **PROVE** — the gate: `proving-by-failure`. Every new or promoted test has a witnessed red on record in `evidence/`, the battery for the class is complete, and the suite is green after restoration. No red on record, no "done" — structurally blocked.
-- **RECORD** — `landing-the-tests`: the test change, the `NET.md` row, and the evidence file land in the SAME commit; roster row cleared; worklog `done`. State is updated via `keeping-state` at every phase boundary, not at session end.
+- **RECORD** — `landing-the-tests`: the test change, the `NET.md` row, and the evidence file land in the SAME commit; roster row cleared; worklog `done`. State is updated via `keeping-test-state` at every phase boundary, not at session end.
 
 ## The three write zones
 
@@ -66,7 +66,7 @@ Deconfliction check (`harvesting-signals`) before any test-file write.
 ## The three structural rules
 
 1. **No `NET.md` row flips to `protected` without a proof pointer into `evidence/`.** The red demo exists first (`proving-by-failure`) or the status doesn't change.
-2. **State is updated at every phase boundary** (`keeping-state`). A session that dies right now must be resumable from `.ratchet-testing/` alone.
+2. **State is updated at every phase boundary** (`keeping-test-state`). A session that dies right now must be resumable from `.ratchet-testing/` alone.
 3. No seam → `requesting-the-seam`, never a smuggled edit (zones above).
 
 ## If you're tempted to skip routing
@@ -76,7 +76,7 @@ Routing costs one table lookup; skipping it costs the predictability everything 
 ## Stop conditions
 
 - **No `RISKS.md`, or it's unapproved** → `defining-the-risks`. Nothing above R0 may be classified; no other task is legal first.
-- **Roster lists an active task** → `resuming-work`. Do not start new work over it.
+- **Roster lists an active task** → `resuming-test-work`. Do not start new work over it.
 - **The write you're about to make lands in production source or `.ratchet/`** → stop. If a seam is missing, `requesting-the-seam`.
 - **The test file belongs to an active main-ratchet task** → off-limits until that task lands.
 

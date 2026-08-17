@@ -60,7 +60,7 @@ A mechanism is a concrete, checkable behavior — never a value statement.
 | 9 | **Unknown blind spots** — nobody can say what the net does *not* cover | `NET.md` records deliberate non-protection (`R0`, with reason) separately from gaps; any gap at R2+ auto-queues a backfill task at harvest | `mapping-the-net`, `backfilling-the-gap` |
 | 10 | **Untestable code gets apologies** — "no seam" ends the conversation | Seam requests are a defined workflow with a durable artifact, not an exception begged from the user | `requesting-the-seam` |
 | 11 | **The two ratchets colliding** — both editing the same test file | Deconfliction rule (above): active main-ratchet tasks own their test files; ownership is checked by reading `.ratchet/STATE.md` before any write | `harvesting-signals` |
-| 12 | **Stale trust in the map** — `NET.md` claims protection that no longer exists | The map is a claim until checked: audits sample `NET.md` rows and re-prove them; resume verifies the roster against the actual suite before continuing. Agents lie accidentally — including this one's past self | `auditing-the-suite`, `resuming-work` |
+| 12 | **Stale trust in the map** — `NET.md` claims protection that no longer exists | The map is a claim until checked: audits sample `NET.md` rows and re-prove them; resume verifies the roster against the actual suite before continuing. Agents lie accidentally — including this one's past self | `auditing-the-suite`, `resuming-test-work` |
 
 ## The spine
 
@@ -70,7 +70,7 @@ Every testing task walks the same five beats as the parent — with two beats re
 ORIENT (+ HARVEST) → SIZE (against RISKS.md) → BUILD (battery-scaled) → PROVE → RECORD
 ```
 
-- **ORIENT + HARVEST** — read `.ratchet-testing/STATE.md`, `NET.md`, and `RISKS.md`. If the roster lists an active task, that's a resume (`resuming-work`), not a new task. Then harvest: diff `.ratchet/` against the watermark in `HARVEST.md` and convert new signals into queued tasks by rule (see *Where work comes from*). Harvest costs one read pass; it is what makes the sub-ratchet self-feeding and session-independent.
+- **ORIENT + HARVEST** — read `.ratchet-testing/STATE.md`, `NET.md`, and `RISKS.md`. If the roster lists an active task, that's a resume (`resuming-test-work`), not a new task. Then harvest: diff `.ratchet/` against the watermark in `HARVEST.md` and convert new signals into queued tasks by rule (see *Where work comes from*). Harvest costs one read pass; it is what makes the sub-ratchet self-feeding and session-independent.
 - **SIZE** — classify the behavior(s) at stake into a risk class using `RISKS.md` (`sizing-the-tests`). Classification is mechanical: the judgment already happened, once, on record, when the risk model was approved. A task touching multiple behaviors inherits the highest class among them. One line in the worklog.
 - **BUILD** — the risk class decides the battery (see tier table). The task type routes to its skill: `hardening-the-evidence`, `pinning-the-bug`, `backfilling-the-gap`, or `characterizing-the-behavior`.
 - **PROVE** — the gate (`proving-by-failure`). Done means: every new or promoted test has a recorded red demonstration in `evidence/`, the full battery for the behavior's class is present, and the suite is green *after* restoration. A pass is not proof; only the witnessed failure is. No red on record, no "done" — structurally blocked, not discouraged.
@@ -218,7 +218,7 @@ Load **`using-ratchet-testing`** first — it routes every task and makes the re
 
 | Skill | Defeats |
 | --- | --- |
-| `keeping-state` / `resuming-work` | context loss between sessions — the parent's discipline, pointed at `.ratchet-testing/` |
+| `keeping-test-state` / `resuming-test-work` | context loss between sessions — the parent's discipline, pointed at `.ratchet-testing/` |
 
 Sixteen skills. Each declares which failure mode it prevents; a skill that prevents nothing gets deleted.
 

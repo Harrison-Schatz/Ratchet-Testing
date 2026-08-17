@@ -43,7 +43,7 @@ Non-seam records (candidate issues from characterization or flake observation) u
 ## Step 4 — Record the gap
 
 - `NET.md` via `mapping-the-net`: the behavior's row is `gap` with a pointer to the request file. A blocked pin leaves its regression window open **and recorded** — visible at every audit, not forgotten.
-- Worklog `blocked` line pointing at the request (`keeping-state`); if this blocked your active task, snapshot it and take the next queued task.
+- Worklog `blocked` line pointing at the request (`keeping-test-state`); if this blocked your active task, snapshot it and take the next queued task.
 
 ## Step 5 — Reap at harvest
 

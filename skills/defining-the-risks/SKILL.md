@@ -61,7 +61,7 @@ Approved by: <name>   Approved on: <YYYY-MM-DD>
 |---|---|---|---|
 ```
 
-On approval: worklog `decision` entry (format per `keeping-state`) naming the approver, then return to `using-ratchet-testing` — sizing is now unblocked.
+On approval: worklog `decision` entry (format per `keeping-test-state`) naming the approver, then return to `using-ratchet-testing` — sizing is now unblocked.
 
 ## Step 5 — Amendment procedure
 

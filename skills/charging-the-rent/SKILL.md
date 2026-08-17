@@ -46,7 +46,7 @@ Work down; stop at the first rung that fits. Every disposition is recorded.
 
 Deletion is a first-class recorded outcome:
 
-- One worklog `decision` line per disposition — test, defaulter type, rung taken, reason (`keeping-state`).
+- One worklog `decision` line per disposition — test, defaulter type, rung taken, reason (`keeping-test-state`).
 - The `NET.md` change lands in the SAME commit as the test deletion or merge (`landing-the-tests` atomicity: protection and its map never diverge in history).
 
 ## Stop conditions
