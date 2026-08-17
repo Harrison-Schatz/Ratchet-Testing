@@ -21,7 +21,7 @@ Run this for EVERY new or promoted test — not a sample.
 3. **Run the test.** Capture the verbatim red output. It must fail on the assertion that names the behavior — an import error or crash proves the test ran, not that it guards.
 4. **Restore**: `git restore <paths>` / `git stash pop` / undo the mutation. Prove it: `git status` clean, `git diff` EMPTY across production source. The check goes into the entry.
 5. **Re-run: green.** Same test, restored tree.
-6. **Append both outputs, dated,** to `.ratchet-testing/evidence/<area>--<slug>.md`, and write a worklog `proof` line pointing at the entry — pointers, never pasted output (`keeping-state`).
+6. **Append both outputs, dated,** to `.ratchet-testing/evidence/<area>--<slug>.md`, and write a worklog `proof` line pointing at the entry — pointers, never pasted output (`keeping-test-state`).
 
 **On the write zone:** step 2 is the one sanctioned touch of production source — working tree only, never committed, proven undone in step 4 before anything else happens. A dirty tree after step 4 is an emergency, not a detail: restore before any other action.
 

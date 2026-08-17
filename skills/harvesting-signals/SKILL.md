@@ -11,7 +11,7 @@ Ratchet-Testing may only *read* `.ratchet/`, so all work is pulled, never pushed
 
 ## Step 1 — When
 
-Harvest cadence: **every session start** (provisional — amend in place with a logged reason). One read pass is nearly free; staleness is the greater risk. Harvest again on demand when the queue empties mid-session. One exception: if the `.ratchet-testing/STATE.md` roster lists an active task, `resuming-work` takes precedence — harvest before claiming any *new* task, never instead of a resume.
+Harvest cadence: **every session start** (provisional — amend in place with a logged reason). One read pass is nearly free; staleness is the greater risk. Harvest again on demand when the queue empties mid-session. One exception: if the `.ratchet-testing/STATE.md` roster lists an active task, `resuming-test-work` takes precedence — harvest before claiming any *new* task, never instead of a resume.
 
 ## Step 2 — Read against the watermark
 
@@ -57,9 +57,9 @@ A harvested behavior with no `NET.md` row enters the map as `gap` or `R0(<reason
 ## Step 4 — Queue and record
 
 - **The queue lives in HARVEST.md** — one line per queued task, held in priority order: **pins → R3 gaps → hardening → lower-class backfill → audits.** An explicit human request preempts all. Characterize tasks take the rank of the gap they close: an R3 pre-change characterization ranks with R3 gaps; others rank with their class's backfill.
-- **The roster (`.ratchet-testing/STATE.md`) holds only ACTIVE tasks.** A task gets its roster row when claimed, not when queued (`keeping-state`). Formal classification happens at claim (`sizing-the-tests`); the queue's Class column is a copy of the `NET.md` row, kept only for ordering.
+- **The roster (`.ratchet-testing/STATE.md`) holds only ACTIVE tasks.** A task gets its roster row when claimed, not when queued (`keeping-test-state`). Formal classification happens at claim (`sizing-the-tests`); the queue's Class column is a copy of the `NET.md` row, kept only for ordering.
 - Bump "Harvests since last sweep". At the Config threshold — or any time suite runtime is over budget — queue `auditing-the-suite`.
-- The pass's record IS the `HARVEST.md` update (watermark move, counter, queue diff). A `harvest` worklog entry is written only at claim time, in the claimed task's worklog (`keeping-state`).
+- The pass's record IS the `HARVEST.md` update (watermark move, counter, queue diff). A `harvest` worklog entry is written only at claim time, in the claimed task's worklog (`keeping-test-state`).
 
 ## The deconfliction check — failure mode #11's answer
 
