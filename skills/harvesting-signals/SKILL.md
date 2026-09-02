@@ -15,7 +15,7 @@ Harvest cadence: **every session start** (provisional — amend in place with a 
 
 ## Step 2 — Read against the watermark
 
-Open `.ratchet-testing/HARVEST.md`. For each source, read only what is newer than the recorded position, then advance the position. No file yet → create it from this template with the watermark empty; the first harvest reads everything, and that is fine.
+Open `.ratchet-testing/HARVEST.md`. For each source, read only what is newer than the recorded position, then advance the position. The position is a commit SHA when `.ratchet/` is version-controlled; the parent lets a project gitignore it, and then the position is the newest entry timestamp you read (entries are dated) — record which form the column holds. No file yet → create it from this template with the watermark empty; the first harvest reads everything, and that is fine.
 
 ```markdown
 # HARVEST
@@ -28,6 +28,8 @@ Open `.ratchet-testing/HARVEST.md`. For each source, read only what is newer tha
 | .ratchet/LESSONS.md | <sha> | <YYYY-MM-DD> |
 | .ratchet/review/ | <sha> | <YYYY-MM-DD> |
 | .ratchet/briefs/ | <sha> | <YYYY-MM-DD> |
+| .ratchet/plans/ | <sha> | <YYYY-MM-DD> |
+| .ratchet/issues/ | <sha> | <YYYY-MM-DD> |
 
 ## Config
 - Harvest cadence: every session start (provisional — amend in place with a logged reason)
@@ -49,7 +51,7 @@ Supplementary passes ride along:
 
 - A brief or plan naming legacy behavior about to change, where the behavior has no tests → queue `characterizing-the-behavior`.
 - An R2+ `NET.md` gap whose behavior exists in code but has no spec of record → queue `characterizing-the-behavior`. Precedence: spec of record present → `backfilling-the-gap`; absent (the behavior exists in code, its intent never stated) → `characterizing-the-behavior` first. Brief acceptance checks are a spec of record.
-- Declined/deferred review finding → `mapping-the-net` records the behavior's NET.md row (gap or R0-with-reason, pointing at the finding — the risk-register entry), then `backfilling-the-gap` for any resulting R2+ gap.
+- Declined/deferred review finding, or an open `.ratchet/issues/` record naming a behavior (if `.ratchet/issues/README.md` points at a tracker or another corpus, read there) → `mapping-the-net` records the behavior's NET.md row (gap or R0-with-reason, pointing at the finding or record — the risk-register entry), then `backfilling-the-gap` for any resulting R2+ gap.
 - Re-check open seam requests in `.ratchet-testing/issues/` (`requesting-the-seam`): a landed seam queues the backfill or pin it was blocking.
 
 A harvested behavior with no `NET.md` row enters the map as `gap` or `R0(<reason>)` via `mapping-the-net` — never silently.
@@ -63,7 +65,7 @@ A harvested behavior with no `NET.md` row enters the map as `gap` or `R0(<reason
 
 ## The deconfliction check — failure mode #11's answer
 
-**Before ANY test-file write** — in every skill of this system, not just during harvest — read `.ratchet/STATE.md`'s roster:
+**Before ANY test-file write** — in every skill of this system, not just during harvest — read `.ratchet/STATE.md`'s roster, then each active row's state file (`.ratchet/state/<task-id>.md`, its `owned paths:` line — the roster row only points there):
 
 - Test files under an active main-ratchet task's owned paths are **off-limits until that task lands.**
 - Deconfliction is by reading, not locking — no messaging, no waiting protocol. Queue the affected task and take the next one in priority order.

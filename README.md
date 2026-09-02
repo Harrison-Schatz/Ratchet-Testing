@@ -39,7 +39,7 @@ Three write-zones, enforced by rule:
 Two consequences, both load-bearing:
 
 - **Structural invariant: Ratchet-Testing cannot break the shipped system.** Worst case, it breaks a test. This is why its human gates can sit at the risk model rather than at every task.
-- **Deconfliction by reading, not locking.** Before touching any test file, check `.ratchet/STATE.md`'s roster: test files belonging to an *active* main-ratchet task are off-limits until that task lands. Read access to `.ratchet/` is the entire coordination protocol — no locks, no messaging layer, no awareness required from the main ratchet.
+- **Deconfliction by reading, not locking.** Before touching any test file, check `.ratchet/STATE.md`'s roster and each active task's `.ratchet/state/<task-id>.md` (where its owned paths are listed): test files belonging to an *active* main-ratchet task are off-limits until that task lands. Read access to `.ratchet/` is the entire coordination protocol — no locks, no messaging layer, no awareness required from the main ratchet.
 
 When a behavior is untestable without a production-source change (no seam exists), the answer is a **seam request** — a durable issue record in `.ratchet-testing/issues/` that the main ratchet (or the human) can pick up — never a smuggled edit.
 
@@ -59,7 +59,7 @@ A mechanism is a concrete, checkable behavior — never a value statement.
 | 8 | **Test intent illegibility** — a future session can't tell what a test protects | Every durable test carries a behavior ID (naming/comment convention) resolving to a `NET.md` row. A test with no behavior ID is rent-defaulting by definition | `mapping-the-net`, `charging-the-rent` |
 | 9 | **Unknown blind spots** — nobody can say what the net does *not* cover | `NET.md` records deliberate non-protection (`R0`, with reason) separately from gaps; any gap at R2+ auto-queues a backfill task at harvest | `mapping-the-net`, `backfilling-the-gap` |
 | 10 | **Untestable code gets apologies** — "no seam" ends the conversation | Seam requests are a defined workflow with a durable artifact, not an exception begged from the user | `requesting-the-seam` |
-| 11 | **The two ratchets colliding** — both editing the same test file | Deconfliction rule (above): active main-ratchet tasks own their test files; ownership is checked by reading `.ratchet/STATE.md` before any write | `harvesting-signals` |
+| 11 | **The two ratchets colliding** — both editing the same test file | Deconfliction rule (above): active main-ratchet tasks own their test files; ownership is checked by reading `.ratchet/STATE.md` and the active tasks' state files before any write | `harvesting-signals` |
 | 12 | **Stale trust in the map** — `NET.md` claims protection that no longer exists | The map is a claim until checked: audits sample `NET.md` rows and re-prove them; resume verifies the roster against the actual suite before continuing. Agents lie accidentally — including this one's past self | `auditing-the-suite`, `resuming-test-work` |
 
 ## The spine
@@ -105,7 +105,7 @@ Ratchet-Testing has no inbox. Because it may only *read* `.ratchet/`, all work i
 | Tier 2/3 task lands (`.ratchet/STATE.md` roster, worklogs) | reinforcement pass over the landed change's evidence-tests | `hardening-the-evidence` |
 | Root-caused fix (`.ratchet/worklog/`, debugging entries) | regression pin | `pinning-the-bug` |
 | New rule in `.ratchet/LESSONS.md` | candidate invariant to encode as a test | `backfilling-the-gap` |
-| Declined/deferred review finding (`.ratchet/review/`, `.ratchet/` issues) | risk-register entry; backfill if it names a behavior | `backfilling-the-gap` |
+| Declined/deferred review finding (`.ratchet/review/` — `→ disposition:` lines marked `DECLINED`, `DEFERRED`, or `ISSUE #n`) or an open record in `.ratchet/issues/` (or the corpus its README points at) | risk-register entry; backfill if it names a behavior | `backfilling-the-gap` |
 | Brief acceptance checks (`.ratchet/briefs/`) | candidate durable tests for behaviors entering the map | `mapping-the-net` → `backfilling-the-gap` |
 | Gap at R2+ discovered in `NET.md` | backfill | `backfilling-the-gap` |
 | Scheduled sweep due | suite health audit | `auditing-the-suite` |
@@ -163,7 +163,7 @@ Everything a fresh session needs lives in `.ratchet-testing/` at the repo root:
 
 ```
 .ratchet-testing/
-├── STATE.md      # roster of active testing tasks (one row each) — id, class, phase, NEXT ACTION, pointers
+├── STATE.md      # roster of active testing tasks (one row each) — id, class, type, phase, step, pointers
 ├── NET.md        # THE asset: behavior → risk class → test pointers → proof pointer → status (protected / suspended / gap / R0+reason)
 ├── RISKS.md      # human-approved risk model: class criteria, project-specific examples, amendment log
 ├── HARVEST.md    # watermark + last-read pointers into .ratchet/
@@ -171,7 +171,7 @@ Everything a fresh session needs lives in `.ratchet-testing/` at the repo root:
 ├── state/        # <task-id>.md — per-task cold-resume snapshot
 ├── worklog/      # <task-id>.md — append-only journal: sizings, decisions, surprises, evidence pointers
 ├── evidence/     # red demonstrations and mutation-audit reports, by behavior ID
-└── issues/       # seam requests and durable records readable by the main ratchet (which never has to read them)
+└── issues/       # what testing finds — seam requests, flake records, behavior surprised out while pinning; readable by the main ratchet (which never has to read them). Problems found developing the application live in the parent's `.ratchet/issues/`, which harvest reads and this system never writes
 ```
 
 Resume cost is at most one step, same as the parent: read `STATE.md`, verify claims against `git status` and an actual suite run (state is a claim until checked), reconcile, continue. If `NET.md` grows past comfortable single-file size, it becomes an index over `net/<area>.md` — deferred until it hurts.

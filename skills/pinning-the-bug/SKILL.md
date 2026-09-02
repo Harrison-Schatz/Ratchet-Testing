@@ -11,7 +11,7 @@ A fixed bug with no pin is a bug on layaway: nothing stops the next change from 
 
 ## Step 1 — Intake
 
-1. Input from `harvesting-signals`: a `.ratchet/worklog/` debugging entry — the parent's `debugging-to-root-cause` leaves them — naming a root cause and a fix commit. Both are required; a symptom description without a named cause pins nothing.
+1. Input from `harvesting-signals`: a `.ratchet/worklog/` debugging trail — the parent's `debugging-to-root-cause` leaves a confirmed `hypothesis:` line and an `evidence` entry naming cause, fix, and proof; the fix's commit SHA (or PR) is in that task's `done` entry, written by the parent's `landing-the-change`. Both the named cause and the fix commit are required; a symptom description without a named cause pins nothing.
 2. **The regression-window rule.** Pins outrank everything (queue rules: `harvesting-signals`). The window between fix and pin is the exposure.
 3. Deconfliction (`harvesting-signals`): if the fix's test files belong to a still-active main-ratchet task, the pin waits for that land.
 4. Size via `sizing-the-tests`. One worklog `sizing` line.
