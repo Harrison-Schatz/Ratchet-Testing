@@ -38,7 +38,7 @@ Status: open · opened <date> · class <R1|R2|R3>
 
 The `Status` line is the interface: the main ratchet or the human flips it to `landed (<date>)` or `declined (<date>)`. They never have to read anything else of ours — the request must stand alone.
 
-Non-seam records (candidate issues from characterization or flake observation) use `<date>-issue-<slug>.md` with the same Status line convention.
+Non-seam records (candidate issues from characterization or flake observation) use `<date>-issue-<slug>.md` with the same Status line convention. This folder holds what testing finds; problems found while developing the application are the main ratchet's, in `.ratchet/issues/` — harvest reads that folder, this system never writes it.
 
 ## Step 4 — Record the gap
 

@@ -25,7 +25,7 @@ Ratchet-Testing is the sub-ratchet that builds and maintains the test suite as a
 | Tier 2/3 main-ratchet task lands (`.ratchet/STATE.md` roster, worklogs) | `hardening-the-evidence` | harden |
 | Root-caused fix in `.ratchet/worklog/` debugging entries | `pinning-the-bug` | pin |
 | New rule in `.ratchet/LESSONS.md` | `backfilling-the-gap` | backfill |
-| Declined/deferred review finding | `mapping-the-net` records the behavior's NET.md row (gap or R0-with-reason, pointing at the finding — the risk-register entry), then `backfilling-the-gap` for any resulting R2+ gap | backfill |
+| Declined/deferred review finding, or an open `.ratchet/issues/` record naming a behavior | `mapping-the-net` records the behavior's NET.md row (gap or R0-with-reason, pointing at the finding or record — the risk-register entry), then `backfilling-the-gap` for any resulting R2+ gap | backfill |
 | Brief acceptance checks appear (`.ratchet/briefs/`) | `mapping-the-net`, then `backfilling-the-gap` for any resulting R2+ gap | backfill |
 | Gap at R2+ discovered in `NET.md` | `backfilling-the-gap` | backfill |
 | Legacy behavior about to change, or R2+ gap with no spec of record | `characterizing-the-behavior` | characterize |

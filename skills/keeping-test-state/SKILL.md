@@ -13,7 +13,7 @@ The conversation is volatile memory; `.ratchet-testing/` is disk. This is the pa
 
 ```
 .ratchet-testing/
-├── STATE.md      # roster of active testing tasks (one row each) — id, class, phase, NEXT ACTION, pointers — owner: this skill
+├── STATE.md      # roster of active testing tasks (one row each) — id, class, type, phase, step, pointers — owner: this skill
 ├── NET.md        # THE asset: behavior → risk class → test pointers → proof pointer → status (protected / suspended / gap / R0+reason) — owner: mapping-the-net
 ├── RISKS.md      # human-approved risk model: class criteria, project-specific examples, amendment log — owner: defining-the-risks
 ├── HARVEST.md    # watermark + last-read pointers into .ratchet/ — owner: harvesting-signals
@@ -21,7 +21,7 @@ The conversation is volatile memory; `.ratchet-testing/` is disk. This is the pa
 ├── state/        # <task-id>.md — per-task cold-resume snapshot — owner: this skill
 ├── worklog/      # <task-id>.md — append-only journal: sizings, decisions, surprises, evidence pointers — owner: this skill
 ├── evidence/     # red demonstrations and mutation-audit reports, by behavior ID — owner: proving-by-failure
-└── issues/       # seam requests and durable records readable by the main ratchet (which never has to read them) — owner: requesting-the-seam
+└── issues/       # what testing finds — seam requests, flake records, behavior surprised out while pinning; readable by the main ratchet (which never has to read them). Problems found developing the application live in the parent's `.ratchet/issues/` — read by harvest, never written here — owner: requesting-the-seam
 ```
 
 Task id: `YYYY-MM-DD-<slug>`. Point at the owner; never restate its template. Add `.ratchet-testing/` to version control — state that isn't pushed dies with the laptop.
@@ -43,12 +43,12 @@ Write zones and deconfliction: `using-ratchet-testing` / `harvesting-signals`. T
 updated: 2026-08-14 09:12
 
 ## Active tasks
-| task-id | class | type | phase | step | NEXT ACTION | pointers |
+| task-id | class | type | phase | step | state file | worklog |
 |---|---|---|---|---|---|---|
-| 2026-08-14-pin-refresh-204 | R2 | pin | building | 2/4 | Revert fix a1b2c3d with -n; run the pin test; capture the red | state/2026-08-14-pin-refresh-204.md |
+| 2026-08-14-pin-refresh-204 | R2 | pin | building | 2/4 | state/2026-08-14-pin-refresh-204.md | worklog/2026-08-14-pin-refresh-204.md |
 ```
 
-`class` ∈ R0–R3 (from `sizing-the-tests`); `type` ∈ harden | pin | backfill | characterize | audit; `phase` ∈ sizing | building | proving | recording (the spine beats a claimed task walks).
+`class` ∈ R0–R3 (from `sizing-the-tests`); `type` ∈ harden | pin | backfill | characterize | audit; `phase` ∈ sizing | building | proving | recording (the spine beats a claimed task walks). The row is an index: NEXT ACTION lives only in the state file, so it has one place to go stale.
 
 ## state/<task-id>.md — the snapshot (overwrite at every phase boundary and step)
 

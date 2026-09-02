@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.1.3 — 2026-09-02
+
+### Changed
+- The deconfliction check reads each active main-ratchet task's `.ratchet/state/<task-id>.md` for owned paths, which the parent's roster does not carry (`harvesting-signals`, README). (#6)
+- `pinning-the-bug` intake names the parent's actual trail — the `hypothesis:` line and `evidence` entry in the worklog, with the fix commit in the task's `done` entry. (#6)
+- The harvest reads `.ratchet/plans/` and `.ratchet/issues/` as sources, and the watermark position may be a timestamp when `.ratchet/` is not version-controlled (`harvesting-signals`, README). (#6)
+- The roster row is an index with `state file` and `worklog` columns; NEXT ACTION lives only in the state file (`keeping-test-state`, README). (#6)
+- `.ratchet-testing/issues/` is defined as what testing finds, distinct from the parent's `.ratchet/issues/` for problems found developing the application, which this system reads and never writes (`requesting-the-seam`, `keeping-test-state`, README). (#6)
+- Declined review findings and open `.ratchet/issues/` records both route to `mapping-the-net` then `backfilling-the-gap` (`using-ratchet-testing`, `harvesting-signals`). (#6)
+
 ## 0.1.2 — 2026-09-02
 
 ### Changed
