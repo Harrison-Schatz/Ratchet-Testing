@@ -27,7 +27,7 @@ Test-writes only. In order of cheapness: call the behavior directly from a test;
 ## Step 3 — Capture the golden master
 
 1. Build an input grid per input axis: typical, boundary (empty / zero / null / max), and at least one garbage input — "what does it currently do with garbage?" is a behavior too.
-2. Run the CURRENT code over the grid and capture the actual output. Don't assert your model of the behavior — assert the captured output. (Cheap trick from the parent: assert a wrong-but-plausible value first; the failure message tells you the real one.)
+2. Run the CURRENT code over the grid and capture the actual output. Don't assert your model of the behavior — assert the captured output.
 3. The test asserts current output verbatim, **bugs included**. Golden-master files are legitimate for large outputs (reports, serialized structures): capture once, diff against the master thereafter.
 4. Nondeterminism (time, random, ordering): control it at the seam — fake clock, fixed seed — or assert invariant properties instead of exact values. Never pin output you can't reproduce.
 5. Tag `[net: <behavior-id>]`; name tests for what they record: `renders 2-digit totals unpadded (current behavior)`. Distinct findings get check sub-entries: `billing/invoice-render#garbage-input`.
