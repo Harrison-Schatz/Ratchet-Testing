@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.2 — 2026-09-02
+
+### Changed
+- Removed two instructions a prompt audit found dated for current models. `resuming-test-work` no longer caps the resume summary at "2–4 sentences" — current models already under-narrate, so a sentence count cut the wrong way; the step now asks for a summary written for a reader who did not see the previous session, same content list. `characterizing-the-behavior` dropped the "assert a wrong-but-plausible value first" aside — method coaching that displaced the model's own approach without changing what the step requires. Audit scope was the 17 skills; everything else that matched a dated idiom was judged load-bearing and kept.
+
 ## 0.1.1 — 2026-08-17
 
 ### Changed

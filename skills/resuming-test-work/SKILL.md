@@ -40,7 +40,7 @@ Deconfliction check (`harvesting-signals`) before any test-file write.
 ## Step 3 — Reconcile and continue
 
 1. Correct the state file and roster row to verified reality; worklog `surprise` if the drift was material (a one-line `decision` if trivial).
-2. Tell the user in 2–4 sentences: task, step N of M, anything reconciled, what happens next. Do not re-litigate decisions already in the worklog — the record is the memory.
+2. Tell the user where things stand, written for a reader who did not see the previous session: task, step N of M, anything reconciled, what happens next. Do not re-litigate decisions already in the worklog — the record is the memory.
 3. Execute the NEXT ACTION sentence. **Never restart work that exists on disk** — a test with a dated evidence/ entry keeps its proof; rewriting it from scratch discards a witnessed failure for nothing.
 
 ## Stop conditions
