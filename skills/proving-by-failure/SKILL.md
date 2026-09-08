@@ -55,6 +55,9 @@ Verbatim means the assertion line(s) and exit status — enough for an audit to 
 - **Red for the wrong reason** (error, not the behavior's assertion) → not proof. Fix the test, re-run the procedure.
 - **Restoration not clean** (`git diff` non-empty) → stop everything and restore; nothing else happens on a dirty tree.
 - **Suite not green after restoration** → something beyond the demo broke; do not proceed to `landing-the-tests`.
+- **Expected value derived from the implementation's own expression** → a tautology, green under every break of that formula. Compute the expectation by hand or from an independent source, then re-run.
+- **A uniform fixture for a per-row rule** (every row passes for the same reason) → a mutation that swaps one row's value for another's changes nothing. At least two rows must differ in the property under test.
+- **The break never reached the test** (runner saw the old tree, or the mutated path is one the test never exercises) → not a red run, and not proof the test cannot fail. Break what the test observes, in the tree the runner sees, then re-run.
 
 ## Rationalization check
 

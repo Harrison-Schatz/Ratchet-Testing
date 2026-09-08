@@ -1,5 +1,10 @@
 # Changelog
 
+## Unreleased
+
+### Changed
+- `proving-by-failure` Stop conditions name three more non-proofs: an expectation derived from the implementation's own formula, a uniform fixture for a per-row rule, and a planted break the test never observed. (#7)
+
 ## 0.1.3 — 2026-09-02
 
 ### Changed
