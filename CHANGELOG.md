@@ -3,7 +3,7 @@
 ## Unreleased
 
 ### Changed
-- `proving-by-failure` Stop conditions name three more non-proofs: an expectation derived from the implementation's own expression, a uniform fixture standing in for a per-row rule, and a planted break the test never observed because the runner saw the old tree or never reached the path. (#7)
+- `proving-by-failure` Stop conditions name three more non-proofs: an expectation derived from the implementation's own formula, a uniform fixture for a per-row rule, and a planted break the test never observed. (#7)
 
 ## 0.1.3 — 2026-09-02
 
