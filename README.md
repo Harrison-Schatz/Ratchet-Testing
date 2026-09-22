@@ -232,6 +232,19 @@ Deliberately unresolved — each needs a decision, not more prose:
 4. **Behavior granularity.** What is one row in `NET.md` — a user-visible capability ("valid user can log in"), or finer ("login rejects expired tokens")? Proposal: capability-level rows with check-level sub-entries, mirroring brief → acceptance-check structure so harvested briefs map cleanly.
 5. **Flake budget size.** Three sessions is a placeholder; the right number is "short enough that quarantine feels urgent, long enough that dispositions aren't rushed."
 
+## Installing
+
+Claude Code, as a plugin (the repo is its own marketplace):
+
+```bash
+claude plugin marketplace add Harrison-Schatz/Ratchet-Testing
+claude plugin install ratchet-testing@ratchet-testing
+```
+
+Skills list under the `ratchet-testing` source (e.g. `ratchet-testing:proving-by-failure`); `claude plugin update ratchet-testing@ratchet-testing` pulls the latest release. Install the parent [Ratchet](https://github.com/Harrison-Schatz/Ratchet) plugin alongside it — this system reads the parent's `.ratchet/` and routes bare "continue" to the parent's `resuming-work`. Do not also copy `skills/` into a skills directory; the harness would load each skill twice.
+
+Any other harness: copy the `skills/` directories into its skills location, keeping LF line endings (the repo's `.gitattributes` enforces them on checkout).
+
 ## Provenance
 
 Ratchet-Testing is a tailored sub-ratchet of [Ratchet](https://github.com/Harrison-Schatz/Ratchet), inheriting its spine shape, its state discipline, and its principles — then re-tooling the two beats where testing demands more: sizing (by consequence, not size) and verification (by witnessed failure, not green output). Every divergence from the parent has a written reason. If you can't predict which skill fires for a given signal from this document and `using-ratchet-testing` alone, that's a bug — file it.

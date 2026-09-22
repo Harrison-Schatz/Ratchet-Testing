@@ -1,6 +1,9 @@
 # Changelog
 
-## Unreleased
+## 0.1.4 — 2026-09-22
+
+### Added
+- The repo installs as a Claude Code plugin: `.claude-plugin/plugin.json` + `marketplace.json`, so `claude plugin marketplace add Harrison-Schatz/Ratchet-Testing` and `claude plugin install ratchet-testing@ratchet-testing` replace hand-copying `skills/`, and installed skills list under the `ratchet-testing` source. `.gitattributes` forces LF so a plugin clone on an `autocrlf=true` machine cannot break `SKILL.md` frontmatter parsing. README gains an "Installing" section. (#8)
 
 ### Changed
 - `proving-by-failure` Stop conditions name three more non-proofs: an expectation derived from the implementation's own formula, a uniform fixture for a per-row rule, and a planted break the test never observed. (#7)
