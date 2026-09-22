@@ -1,0 +1,13 @@
+{
+  "name": "ratchet-testing",
+  "version": "0.1.4",
+  "description": "Ratchet-Testing: the sub-ratchet that builds and maintains a durable test suite by witnessed failure, as 17 Claude Code skills.",
+  "author": {
+    "name": "Harrison Schatz",
+    "url": "https://github.com/Harrison-Schatz"
+  },
+  "homepage": "https://github.com/Harrison-Schatz/Ratchet-Testing",
+  "repository": "https://github.com/Harrison-Schatz/Ratchet-Testing",
+  "license": "MIT",
+  "keywords": ["methodology", "skills", "testing", "regression", "verification"]
+}

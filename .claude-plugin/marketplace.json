@@ -1,0 +1,15 @@
+{
+  "name": "ratchet-testing",
+  "description": "Ratchet-Testing: evidence-gated methodology for durable test suites; a sub-ratchet of Ratchet.",
+  "owner": {
+    "name": "Harrison Schatz",
+    "url": "https://github.com/Harrison-Schatz"
+  },
+  "plugins": [
+    {
+      "name": "ratchet-testing",
+      "description": "The 17 Ratchet-Testing skills: harvest, size by risk, harden, pin, backfill, prove by failure, quarantine, audit. Router: using-ratchet-testing. Requires the ratchet plugin for the parent methodology.",
+      "source": "./"
+    }
+  ]
+}

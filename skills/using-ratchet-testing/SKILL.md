@@ -9,6 +9,8 @@ Ratchet-Testing is the sub-ratchet that builds and maintains the test suite as a
 
 **Prevents:** the meta-failure of skills never firing — none of failure modes #1–#12 is defeated if its skill doesn't fire on its signal. If a routing decision isn't predictable from this file plus the README, that's a bug — file it.
 
+**Naming.** Installed as a Claude Code plugin, every skill in this catalog is listed as `ratchet-testing:<name>` and the parent's as `ratchet:<name>`; a bare name anywhere in these skills means that entry. Copied into a skills directory instead, the names are bare.
+
 ## Step 0 — Orient (always, before anything else)
 
 1. Read `.ratchet-testing/STATE.md` — the roster of ACTIVE testing tasks.
